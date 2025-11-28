@@ -1,0 +1,247 @@
+[
+  {
+    "username": "jdoe",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 200,
+    "scenario": "Test successful authentication with valid credentials - returns JWT token"
+  },
+  {
+    "username": "validuser",
+    "password": "SecurePass123!",
+    "expected_statusCode": 200,
+    "scenario": "Test successful login with different valid user credentials"
+  },
+  {
+    "username": "admin",
+    "password": "AdminP@ss2024",
+    "expected_statusCode": 200,
+    "scenario": "Test successful authentication returns token and expiresIn fields"
+  },
+  {
+    "username": "test.user@example.com",
+    "password": "Test!Pass#456",
+    "expected_statusCode": 200,
+    "scenario": "Test successful login with email-format username"
+  },
+  {
+    "username": "user_with_underscore",
+    "password": "Valid_Pass!789",
+    "expected_statusCode": 200,
+    "scenario": "Test successful authentication with underscore in username"
+  },
+  {
+    "username": "wronguser",
+    "password": "WrongPassword123",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication failure with invalid username"
+  },
+  {
+    "username": "jdoe",
+    "password": "incorrectpassword",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication failure with wrong password for valid user"
+  },
+  {
+    "username": "",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with empty string username returns 401"
+  },
+  {
+    "username": "jdoe",
+    "password": "",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with empty string password returns 401"
+  },
+  {
+    "username": "",
+    "password": "",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with both empty username and password"
+  },
+  {
+    "username": null,
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with null username value returns 401"
+  },
+  {
+    "username": "jdoe",
+    "password": null,
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with null password value returns 401"
+  },
+  {
+    "username": "   ",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with whitespace-only username returns 401"
+  },
+  {
+    "username": "jdoe",
+    "password": "   ",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with whitespace-only password returns 401"
+  },
+  {
+    "username": "nonexistent_user_12345",
+    "password": "SomePassword!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with non-existent username"
+  },
+  {
+    "username": "admin' OR '1'='1' --",
+    "password": "password",
+    "expected_statusCode": 401,
+    "scenario": "Test SQL injection attempt in username returns 401"
+  },
+  {
+    "username": "<script>alert('xss')</script>",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test XSS injection attempt in username returns 401"
+  },
+  {
+    "username": "jdoe",
+    "password": "' OR '1'='1",
+    "expected_statusCode": 401,
+    "scenario": "Test SQL injection attempt in password returns 401"
+  },
+  {
+    "username": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with very long username (256+ chars)"
+  },
+  {
+    "username": "jdoe",
+    "password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with very long password (256+ chars)"
+  },
+  {
+    "username": "JDOE",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test case sensitivity - uppercase username for lowercase registered user"
+  },
+  {
+    "username": "JdOe",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test case sensitivity - mixed case username"
+  },
+  {
+    "username": "user!@#$%^&*()",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with special characters in username"
+  },
+  {
+    "username": "用户名",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with unicode characters in username"
+  },
+  {
+    "username": "jdoe",
+    "password": "密码测试",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with unicode characters in password"
+  },
+  {
+    "username": 12345,
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with integer username instead of string"
+  },
+  {
+    "username": "jdoe",
+    "password": 12345,
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with integer password instead of string"
+  },
+  {
+    "username": ["jdoe"],
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with array username instead of string"
+  },
+  {
+    "username": "jdoe",
+    "password": ["P@ssw0rd!"],
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with array password instead of string"
+  },
+  {
+    "username": {"name": "jdoe"},
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with object username instead of string"
+  },
+  {
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with missing username field"
+  },
+  {
+    "username": "jdoe",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with missing password field"
+  },
+  {
+    "username": "jdoe",
+    "password": "P@ssw0rd!",
+    "extraField": "unexpected",
+    "expected_statusCode": 200,
+    "scenario": "Test authentication with extra unexpected fields in request body"
+  },
+  {
+    "username": " jdoe",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with leading whitespace in username"
+  },
+  {
+    "username": "jdoe ",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with trailing whitespace in username"
+  },
+  {
+    "username": "jdoe",
+    "password": " P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with leading whitespace in password"
+  },
+  {
+    "username": "jdoe",
+    "password": "P@ssw0rd! ",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with trailing whitespace in password"
+  },
+  {
+    "username": "j",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with single character username"
+  },
+  {
+    "username": "jdoe",
+    "password": "a",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with single character password"
+  },
+  {
+    "username": "test\nuser",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with newline character in username"
+  },
+  {
+    "username": "jdoe",
+    "password": "pass\tword",
+    "expected_statusCode": 401,
+    "scenario": "Test authentication with tab character in password"
+  }
+]

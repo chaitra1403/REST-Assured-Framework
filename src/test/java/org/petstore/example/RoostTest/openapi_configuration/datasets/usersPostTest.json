@@ -1,0 +1,245 @@
+[
+  {
+    "username": "jdoe",
+    "email": "jdoe@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with all valid required fields - username, email, and password"
+  },
+  {
+    "username": "testuser123",
+    "email": "testuser123@domain.org",
+    "password": "SecurePass123!",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with alphanumeric username and valid credentials"
+  },
+  {
+    "username": "user_test",
+    "email": "user.test+tag@example.com",
+    "password": "MyP@ss2024!",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with email containing plus addressing (valid email format)"
+  },
+  {
+    "username": "minuser",
+    "email": "min@test.io",
+    "password": "Min1Pass!",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with minimal length valid values"
+  },
+  {
+    "username": "john.doe",
+    "email": "john.doe@company.co.uk",
+    "password": "Complex#Pass99",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with dot in username and multi-part domain email"
+  },
+  {
+    "email": "nouser@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with missing required username field"
+  },
+  {
+    "username": "testuser",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with missing required email field"
+  },
+  {
+    "username": "testuser",
+    "email": "test@example.com",
+    "expected_statusCode": 400,
+    "scenario": "Test request with missing required password field"
+  },
+  {
+    "username": "",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with empty string username"
+  },
+  {
+    "username": "testuser",
+    "email": "",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with empty string email"
+  },
+  {
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "",
+    "expected_statusCode": 400,
+    "scenario": "Test request with empty string password"
+  },
+  {
+    "username": "testuser",
+    "email": "invalid-email-format",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with invalid email format - missing @ symbol"
+  },
+  {
+    "username": "testuser",
+    "email": "user@",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with email missing domain part"
+  },
+  {
+    "username": "testuser",
+    "email": "@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with email missing local part"
+  },
+  {
+    "username": "testuser",
+    "email": "user@@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with email containing multiple @ symbols"
+  },
+  {
+    "username": null,
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with null username value"
+  },
+  {
+    "username": "testuser",
+    "email": null,
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with null email value"
+  },
+  {
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": null,
+    "expected_statusCode": 400,
+    "scenario": "Test request with null password value"
+  },
+  {
+    "username": "   ",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with username containing only whitespace"
+  },
+  {
+    "username": "  jdoe  ",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with leading and trailing spaces in username"
+  },
+  {
+    "username": "testuser",
+    "email": "  test@example.com  ",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with leading and trailing spaces in email"
+  },
+  {
+    "username": "a]b[c{d}e",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with special characters in username"
+  },
+  {
+    "username": "verylongusernamethatexceedstypicallimitsandshouldberejectedduetoexcessivelengthvalidationrules",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with extremely long username exceeding typical limits"
+  },
+  {
+    "username": "testuser",
+    "email": "verylongemailaddressthatexceedstypicallimitsandshouldberejectedduetoexcessivelengthvalidationrules@verylongdomainname.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with extremely long email address"
+  },
+  {
+    "username": 12345,
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with wrong data type for username - integer instead of string"
+  },
+  {
+    "username": "testuser",
+    "email": true,
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with wrong data type for email - boolean instead of string"
+  },
+  {
+    "username": ["user1", "user2"],
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with array type for username field"
+  },
+  {
+    "username": {"name": "test"},
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with object type for username field"
+  },
+  {
+    "username": "admin'; DROP TABLE users;--",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with SQL injection attempt in username"
+  },
+  {
+    "username": "<script>alert(1)</script>",
+    "email": "test@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 400,
+    "scenario": "Test request with XSS script injection in username"
+  },
+  {
+    "username": "用户名",
+    "email": "unicode@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 201,
+    "scenario": "Test request with unicode characters in username"
+  },
+  {
+    "username": "newuser",
+    "email": "new.user@example.com",
+    "password": "P@ssw0rd!",
+    "unknownField": "extraValue",
+    "expected_statusCode": 201,
+    "scenario": "Test request with additional unknown fields in body - should be ignored"
+  },
+  {
+    "username": "12345678",
+    "email": "numeric@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 201,
+    "scenario": "Test request with purely numeric username"
+  },
+  {
+    "username": "user-with-dash",
+    "email": "dash@example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with hyphen in username"
+  },
+  {
+    "username": "testuser",
+    "email": "test.email.multiple.dots@sub.domain.example.com",
+    "password": "P@ssw0rd!",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a user with email containing multiple dots and subdomains"
+  }
+]
