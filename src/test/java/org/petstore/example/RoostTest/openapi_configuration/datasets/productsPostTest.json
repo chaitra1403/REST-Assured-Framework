@@ -1,0 +1,198 @@
+[
+  {
+    "name": "Wireless Mouse",
+    "description": "High-quality wireless mouse with ergonomic design",
+    "price": 29.99,
+    "currency": "USD",
+    "available": true,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with all valid fields - complete product creation"
+  },
+  {
+    "name": "Bluetooth Keyboard",
+    "price": 49.99,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with only required fields (name and price)"
+  },
+  {
+    "name": "USB-C Hub",
+    "description": "Multi-port USB-C hub with HDMI output",
+    "price": 79.50,
+    "currency": "EUR",
+    "available": false,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with different currency and available set to false"
+  },
+  {
+    "name": "Gaming Headset Pro",
+    "price": 0,
+    "currency": "USD",
+    "available": true,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with zero price value"
+  },
+  {
+    "name": "Laptop Stand",
+    "description": "",
+    "price": 35.00,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with empty description string"
+  },
+  {
+    "name": "Producto Español con Ñ",
+    "description": "Descripción con caracteres unicode: café, naïve, 日本語",
+    "price": 25.99,
+    "currency": "USD",
+    "available": true,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with unicode characters in name and description"
+  },
+  {
+    "name": "Product with Special Chars !@#$%^&*()",
+    "price": 15.50,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with special characters in name"
+  },
+  {
+    "name": "Premium Monitor 27-inch 4K",
+    "description": "Ultra HD monitor with HDR support",
+    "price": 999999.99,
+    "currency": "USD",
+    "available": true,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with very large price value"
+  },
+  {
+    "name": "Budget Item",
+    "price": 0.01,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with minimum positive price value"
+  },
+  {
+    "name": "Test Product",
+    "price": 29.999999999,
+    "expected_statusCode": 201,
+    "scenario": "Test creating a product with price having many decimal places"
+  },
+  {
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product without required name field"
+  },
+  {
+    "name": "Test Product",
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product without required price field"
+  },
+  {
+    "name": "",
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with empty string name"
+  },
+  {
+    "name": null,
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with null name value"
+  },
+  {
+    "name": "Test Product",
+    "price": null,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with null price value"
+  },
+  {
+    "name": "Test Product",
+    "price": -29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with negative price value"
+  },
+  {
+    "name": 12345,
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with name as number instead of string"
+  },
+  {
+    "name": "Test Product",
+    "price": "29.99",
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with price as string instead of number"
+  },
+  {
+    "name": "Test Product",
+    "price": 29.99,
+    "available": "true",
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with available as string instead of boolean"
+  },
+  {
+    "name": "Test Product",
+    "price": 29.99,
+    "available": 1,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with available as number instead of boolean"
+  },
+  {
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with empty request body - missing all fields"
+  },
+  {
+    "name": true,
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with name as boolean instead of string"
+  },
+  {
+    "name": ["Product Array"],
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with name as array instead of string"
+  },
+  {
+    "name": {"nested": "object"},
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with name as object instead of string"
+  },
+  {
+    "name": "Test Product",
+    "price": {"amount": 29.99},
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with price as object instead of number"
+  },
+  {
+    "name": "Test Product",
+    "description": 12345,
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with description as number instead of string"
+  },
+  {
+    "name": "Test Product",
+    "price": 29.99,
+    "currency": 123,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with currency as number instead of string"
+  },
+  {
+    "name": "Test Product",
+    "price": 29.99,
+    "currency": "",
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with empty currency string"
+  },
+  {
+    "name": "   ",
+    "price": 29.99,
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with whitespace-only name"
+  },
+  {
+    "name": "Test Product",
+    "price": "not-a-number",
+    "expected_statusCode": 400,
+    "scenario": "Test creating a product with non-numeric string as price"
+  }
+]
