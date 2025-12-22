@@ -1,0 +1,514 @@
+[
+  {
+    "items": [
+      {
+        "productId": "prod_12345",
+        "quantity": 2,
+        "unitPrice": 29.99
+      }
+    ],
+    "shippingAddress": {
+      "line1": "123 Main Street",
+      "line2": "Apt 4B",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10001",
+      "country": "USA"
+    },
+    "notes": "Please deliver before 5 PM",
+    "expected_statusCode": 201,
+    "scenario": "Test creating a valid order with all required fields and complete shipping address"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_001",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "456 Oak Avenue",
+      "city": "Los Angeles"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test creating an order with only required fields and minimal shipping address"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_A1",
+        "quantity": 3,
+        "unitPrice": 15.50
+      },
+      {
+        "productId": "prod_B2",
+        "quantity": 1,
+        "unitPrice": 45.00
+      },
+      {
+        "productId": "prod_C3",
+        "quantity": 5,
+        "unitPrice": 9.99
+      },
+      {
+        "productId": "prod_D4",
+        "quantity": 2,
+        "unitPrice": 120.00
+      },
+      {
+        "productId": "prod_E5",
+        "quantity": 1,
+        "unitPrice": 75.25
+      }
+    ],
+    "shippingAddress": {
+      "line1": "789 Pine Road",
+      "city": "Chicago",
+      "state": "IL",
+      "postalCode": "60601",
+      "country": "USA"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test creating an order with multiple items in the items array"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_single",
+        "quantity": 1,
+        "unitPrice": 199.99
+      }
+    ],
+    "shippingAddress": {
+      "line1": "100 Business Park",
+      "line2": "Suite 500",
+      "city": "San Francisco",
+      "state": "CA",
+      "postalCode": "94102",
+      "country": "USA"
+    },
+    "notes": "",
+    "expected_statusCode": 201,
+    "scenario": "Test creating an order with empty notes field"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_max_qty",
+        "quantity": 100,
+        "unitPrice": 5.00
+      }
+    ],
+    "shippingAddress": {
+      "line1": "200 Warehouse Blvd",
+      "city": "Dallas",
+      "state": "TX",
+      "postalCode": "75201",
+      "country": "USA"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test creating an order with large quantity value"
+  },
+  {
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with empty request body - missing required fields"
+  },
+  {
+    "items": [],
+    "shippingAddress": {
+      "line1": "123 Test Street",
+      "city": "Boston"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with empty items array"
+  },
+  {
+    "items": [
+      {
+        "quantity": 2
+      }
+    ],
+    "shippingAddress": {
+      "line1": "456 Sample Ave",
+      "city": "Seattle"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with item missing productId"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_no_qty"
+      }
+    ],
+    "shippingAddress": {
+      "line1": "789 Demo Lane",
+      "city": "Miami"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with item missing quantity"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_zero",
+        "quantity": 0
+      }
+    ],
+    "shippingAddress": {
+      "line1": "321 Zero Street",
+      "city": "Denver"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with quantity set to 0 (below minimum of 1)"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_negative",
+        "quantity": -5
+      }
+    ],
+    "shippingAddress": {
+      "line1": "654 Negative Ave",
+      "city": "Phoenix"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with negative quantity value"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_string_qty",
+        "quantity": "five"
+      }
+    ],
+    "shippingAddress": {
+      "line1": "987 Type Street",
+      "city": "Portland"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with quantity as string instead of integer"
+  },
+  {
+    "items": [
+      {
+        "productId": null,
+        "quantity": 2
+      }
+    ],
+    "shippingAddress": {
+      "line1": "111 Null Lane",
+      "city": "Austin"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with null productId in items"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_null_qty",
+        "quantity": null
+      }
+    ],
+    "shippingAddress": {
+      "line1": "222 Null Ave",
+      "city": "Nashville"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with null quantity in items"
+  },
+  {
+    "items": [
+      {
+        "productId": "",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "333 Empty Street",
+      "city": "Atlanta"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with empty string productId"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_valid",
+        "quantity": 1
+      }
+    ],
+    "expected_statusCode": 400,
+    "scenario": "Test order creation missing required shippingAddress field"
+  },
+  {
+    "shippingAddress": {
+      "line1": "444 No Items Road",
+      "city": "Houston"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation missing required items field"
+  },
+  {
+    "items": "product1,product2",
+    "shippingAddress": {
+      "line1": "555 Wrong Type Blvd",
+      "city": "Philadelphia"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with items as string instead of array"
+  },
+  {
+    "items": {
+      "productId": "prod_obj",
+      "quantity": 1
+    },
+    "shippingAddress": {
+      "line1": "666 Object Lane",
+      "city": "San Diego"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with items as object instead of array"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_neg_price",
+        "quantity": 1,
+        "unitPrice": -10.99
+      }
+    ],
+    "shippingAddress": {
+      "line1": "777 Price Street",
+      "city": "San Jose"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with negative unitPrice in items"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_float_qty",
+        "quantity": 2.5
+      }
+    ],
+    "shippingAddress": {
+      "line1": "888 Float Ave",
+      "city": "Columbus"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with quantity as decimal number"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_xss",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "<script>alert('xss')</script>",
+      "city": "Indianapolis"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with XSS injection attempt in shipping address"
+  },
+  {
+    "items": [
+      {
+        "productId": "1; DROP TABLE orders;--",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "999 SQL Street",
+      "city": "Charlotte"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with SQL injection attempt in productId"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_dup1",
+        "quantity": 2
+      },
+      {
+        "productId": "prod_dup1",
+        "quantity": 3
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1010 Duplicate Road",
+      "city": "Detroit"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with duplicate productIds in items array"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_large_qty",
+        "quantity": 999999999
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1111 Large Qty Blvd",
+      "city": "Memphis"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with extremely large quantity value"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_price_string",
+        "quantity": 1,
+        "unitPrice": "19.99"
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1212 String Price Ave",
+      "city": "Baltimore"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with unitPrice as string type"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_complete",
+        "quantity": 2,
+        "unitPrice": 49.99
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1313 Complete Street",
+      "line2": "Building A",
+      "city": "Milwaukee",
+      "state": "WI",
+      "postalCode": "53201",
+      "country": "USA"
+    },
+    "notes": "Gift wrap please",
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with complete shipping address and all optional fields"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_partial_addr",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1414 Partial Lane",
+      "city": "Albuquerque"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with partial shipping address (only line1 and city)"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_long_id_" + "x".repeat(500),
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1515 Long ID Street",
+      "city": "Tucson"
+    },
+    "expected_statusCode": 400,
+    "scenario": "Test order creation with very long productId string"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_extra",
+        "quantity": 1,
+        "unknownField": "test"
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1616 Extra Field Ave",
+      "city": "Fresno"
+    },
+    "extraField": "should be ignored",
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with additional unknown fields in request body"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_unicode_🎉",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1717 Unicode Street 日本語",
+      "city": "Sacramento"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with unicode characters in productId and address"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_zero_price",
+        "quantity": 1,
+        "unitPrice": 0
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1818 Free Item Road",
+      "city": "Kansas City"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with zero unitPrice (free item)"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_high_price",
+        "quantity": 1,
+        "unitPrice": 99999.99
+      }
+    ],
+    "shippingAddress": {
+      "line1": "1919 Expensive Ave",
+      "city": "Las Vegas"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with very high unitPrice"
+  },
+  {
+    "items": [
+      {
+        "productId": "   prod_whitespace   ",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "2020 Whitespace Lane",
+      "city": "Cleveland"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with whitespace in productId"
+  },
+  {
+    "items": [
+      {
+        "productId": "prod_special!@#$%",
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "line1": "2121 Special Char Blvd",
+      "city": "Virginia Beach"
+    },
+    "expected_statusCode": 201,
+    "scenario": "Test order creation with special characters in productId"
+  }
+]
